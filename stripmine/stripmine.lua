@@ -1,0 +1,40 @@
+os.loadAPI("Schacht")
+
+local amount_torches = math.ceil(length/15)
+print("Lege ".. amount_torches .." Fackeln in slot 16" )
+
+print("Wenn der erste Block der Abgebaut wird kein cobblestone ist, lege cobbelston in slot1; Tiefe der Seitenschächte: ")
+local length = tonumber(read())
+
+print("Anzahl Seitenschächte pro Seite:")
+local schaechte = tonumber(read())
+
+function turtle_back_to_start(length)
+    fuellevel = turtle.getFuelLevel()
+        if fuellevel < 10 then
+            Schacht.refuel()
+        end
+    turtle.turnLeft()
+    turtle.turnLeft()
+    for i2=1, length do
+        turtle.forward()
+    end
+end
+
+for i=1, schaechte do
+    turtle.turnLeft()
+    Schacht.schacht(length)
+    turtle_back_to_start(length)
+    Schacht.schacht(length)
+    turtle_back_to_start(length)
+    turtle.turnRight()
+    for i3=1, 3 do 
+        turtle.dig()
+        turtle.forward()
+    end
+end
+    
+
+local sExample = http.get("http://example.com/") --Get contents of page
+write(sExample.readAll()) --Read and print contents of page
+sExample.close() --Just in case
