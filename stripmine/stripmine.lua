@@ -1,5 +1,11 @@
 os.loadAPI("Schacht.lua")
 
+local function walk()
+    local success = false
+    while success do
+        success = turtle.forward()
+    end
+end
 
 
 print("Wenn der erste Block der Abgebaut wird kein cobblestone ist, lege cobbelston in slot1; Tiefe der Seitenschächte: ")
@@ -22,7 +28,7 @@ function turtle_back_to_start(length)
         if turtle.detect() then
             turtle.dig()
         end   
-        turtle.forward()
+        walk()
     end
 end
 
@@ -35,7 +41,7 @@ for i=1, schaechte do
     turtle.turnRight()
     for i3=1, 3 do 
         turtle.dig()
-        turtle.forward()
+        walk()
     end
 end
     

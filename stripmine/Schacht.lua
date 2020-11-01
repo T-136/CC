@@ -1,4 +1,10 @@
 
+local function walk()
+    local success = false
+    while success do
+        success = turtle.forward()
+    end
+end
 
 local function place_torche()
     turtle.up()
@@ -9,7 +15,7 @@ local function place_torche()
         turtle.place()
     end
     turtle.turnLeft()
-    turtle.forward()
+    walk()
     turtle.turnRight()
     turtle.turnRight()
     turtle.select(16)
@@ -81,7 +87,7 @@ function schacht(length)
             refuel()
         end
         turtle.dig()
-        turtle.forward()
+        walk()
         turtle.digUp()
         detect_ore_and_dig()
         if i % 15 == 0 then
