@@ -12,10 +12,25 @@ local function refuel()
     return false
 end
 
-local function plantSeed()
-    turtle.select(1)
-    turtle.placeDown()
+local function walk()
+    local success = false
+    while success do
+        success = turtle.forward()
+    end
 end
+
+local function plantSeed()
+    for i=1,16 do
+        local data = turtle.getItemDetail(i)
+        if data and string.match(data['name'], "minecraft:wheat") then
+            turtle.select(i)
+            turtle.placeDown()
+            return
+        end
+    end
+    print("NO SEEDS IN INVENTORY")
+end
+
 
 local function checkAndGo()
     local success, data = turtle.inspectDown()
@@ -30,13 +45,13 @@ local function checkAndGo()
         turtle.digDown("right")
         plantSeed()
     end
-    turtle.forward()
+    walk()
 end
 
 
 
 local function run(size)
-    turtle.forward()
+    walk()
 
     for x=1,size do
         for y=1,size-1 do
@@ -57,7 +72,7 @@ local function run(size)
     turtle.turnRight()
 
     for y=1, size-1 do
-        turtle.forward()
+        walk()
     end
 
     turtle.turnRight()
