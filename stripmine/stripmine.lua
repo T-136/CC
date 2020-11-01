@@ -3,6 +3,7 @@ os.loadAPI("Schacht.lua")
 local function walk()
     local success = false
     while not success do
+        turtle.dig()
         success = turtle.forward()
     end
 end
