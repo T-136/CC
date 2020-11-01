@@ -19,7 +19,7 @@ function turtle_back_to_start(length)
     turtle.turnLeft()
     turtle.turnLeft()
     for i2=1, length do
-        if turtle.detect() do
+        if turtle.detect() then
             turtle.dig()
         end   
         turtle.forward()
