@@ -4,7 +4,7 @@ local amount_torches = math.ceil(length/15)
 print("Lege ".. amount_torches .." Fackeln in slot 16" )
 
 print("Wenn der erste Block der Abgebaut wird kein cobblestone ist, lege cobbelston in slot1; Tiefe der Seitenschächte: ")
-local length = tonumber(read())
+ length = tonumber(read())
 
 print("Anzahl Seitenschächte pro Seite:")
 local schaechte = tonumber(read())
@@ -35,6 +35,3 @@ for i=1, schaechte do
 end
     
 
-local sExample = http.get("http://example.com/") --Get contents of page
-write(sExample.readAll()) --Read and print contents of page
-sExample.close() --Just in case
