@@ -1,10 +1,12 @@
 require("Schacht")
 
-local amount_torches = math.ceil(length/15)
-print("Lege ".. amount_torches .." Fackeln in slot 16" )
+
 
 print("Wenn der erste Block der Abgebaut wird kein cobblestone ist, lege cobbelston in slot1; Tiefe der Seitenschächte: ")
- length = tonumber(read())
+length = tonumber(read())
+
+local amount_torches = math.ceil(length/15)
+print("Lege ".. amount_torches .." Fackeln in slot 16" )
 
 print("Anzahl Seitenschächte pro Seite:")
 local schaechte = tonumber(read())
