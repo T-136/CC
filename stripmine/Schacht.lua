@@ -1,6 +1,6 @@
 
 local function walk()
-    local success = false
+    local success = true
     while not success do
         turtle.dig()
         success = turtle.forward()
