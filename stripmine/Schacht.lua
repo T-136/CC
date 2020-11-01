@@ -1,4 +1,3 @@
-require "math"
 
 
 local function place_torche()
