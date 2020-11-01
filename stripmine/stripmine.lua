@@ -1,4 +1,4 @@
-require("Schacht")
+os.loadAPI("Schacht.lua")
 
 
 
