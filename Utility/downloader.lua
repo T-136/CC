@@ -1,8 +1,8 @@
 -- GET INPUT
-print(" filpath: ")
+print("local filpath: ")
 local filpath = read()
 print("github path: ")
-local url = "https://raw.githubusercontent.com/" + read()
+local url = "https://raw.githubusercontent.com/" .. read()
 
 -- URL REQUEST
 local response = http.get(url)
