@@ -75,7 +75,7 @@ end
 
 
 
-function Schacht(length)
+function schacht(length)
     for i=1, length do
         fuellevel = turtle.getFuelLevel()
         if fuellevel < 10 then
