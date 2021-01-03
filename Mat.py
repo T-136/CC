@@ -15,9 +15,8 @@ class Mat(DataFile):
         files = {}
         for key in data.keys():
             if key.startswith("__"):
-                print(key)
+                pass
             else:
-                print("Super duper key", key)
                 csv_string = pd.DataFrame(data[key]).to_csv(
                     index=False, header=False)
                 files[f"{key}.csv"] = csv_string
@@ -30,6 +29,3 @@ class Mat(DataFile):
             with open(f"{settings['datafolder']}/{self.workingDirectory}/{filename}", "w", newline="") as f:
                 f.write(files[filename])
         return files
-
-
-# Mat("testdatei.mat").save()

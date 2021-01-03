@@ -1,3 +1,4 @@
 
-settings = {"datafolder": "Data"
+settings = {"datafolder": "Data",
+            "folderlimit": 2
             }
