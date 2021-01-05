@@ -1,7 +1,6 @@
 import uuid
 import shutil
 from settings import settings
-import time
 
 
 class DataFile:
@@ -16,3 +15,7 @@ class DataFile:
         print("i was deleted")
         shutil.rmtree(
             f"{settings['datafolder']}/{self.workingDirectory}", ignore_errors=True)
+
+    # @property                                                                                                                          
+    # def readable(self):                                                                                                                
+    #     return self._file.readable   

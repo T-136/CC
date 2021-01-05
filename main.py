@@ -7,6 +7,8 @@ import uvicorn
 import pandas as pd
 from settings import settings
 from Mat import Mat
+from Mat import Csv
+
 app = FastAPI()
 
 folders = []
@@ -18,10 +20,20 @@ def updateFolders(obj):
         del folders[0]
 
 
-@app.post("/uploadfile/")
-async def create_upload_file(file: UploadFile = File(...)):
+@app.get("/convert/{input}/{output}")
+async def convert(file: UploadFile = File(...), input, output):
+    
+    return {"item_id": item_id}
 
-    return {"filename": file.filename}
+
+@app.post("/csvToXlsx")
+async def csvToXlsx(file: UploadFile = File(...)):
+    csv = Csv(file.file)
+    # print(csv.file.read)
+    files = csv.save()
+    updateFolders(csv)
+    # zip_filename = zipper(csv.workingDirectory, files)
+    return FileResponse(files, filename="test.xlsx")
 
 
 @app.post("/matToCsv")
