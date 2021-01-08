@@ -5,10 +5,11 @@ import uvicorn
 from settings import settings
 
 
-from classen_ordner.Csv import Csv
-from classen_ordner.Mat import Mat
+# from classen_ordner.Mat import Mat
+
 
 # print(dir(Csv))
+
 app = FastAPI()
 
 folders = []
@@ -23,16 +24,15 @@ def updateFolders(obj):
 @app.post("/convert/{input}/{output}")
 async def convert(output: str, input: str, file: UploadFile = File(...)):
 
-    # inputfile mit passender Klasse öffnen
+    # inputfile mit passender Klasse
     input_file = eval(input.lower().capitalize())(file.file, file.filename)
-    # inputfile umwandeln und speichern
+    # inputfile öffnen, umwandeln und speichern
     files = eval(f"input_file.{output}()")
     updateFolders(input_file)
     path, file_name = maybe_zipper(
         input_file.workingDirectory, files, input_file.name)
 
     return FileResponse(path, filename=file_name)
-    # return FileResponse(file, filename=f"test.{output}")
 
 
 # @app.post("/csvToXlsx")
