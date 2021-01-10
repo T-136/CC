@@ -1,14 +1,11 @@
 from settings import settings
-import os
-import tempfile
-import csv
 from .DataFile import DataFile, Tables
 from scipy.io import loadmat
 import pandas as pd
 
 
 class Mat(Tables):
-    def toCSV(self):
+    def to_csv(self):
         """returns 
             dict with
                 filename : csv string
@@ -23,11 +20,3 @@ class Mat(Tables):
                     index=False, header=False)
                 files[f"{key}.csv"] = csv_string
         return files
-
-    # def csv(self):
-    #     files = self.toCSV()
-    #     os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
-    #     for filename in files:
-    #         with open(f"{settings['datafolder']}/{self.workingDirectory}/{filename}", "w", newline="") as f:
-    #             f.write(files[filename])
-    #     return files

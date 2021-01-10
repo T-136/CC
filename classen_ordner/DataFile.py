@@ -40,9 +40,10 @@ class Tables(DataFile):
         input: dict{filename : csv_string}
         output: dict{filename : csv_datei}
         '''
-        files = self.toCSV()
+        dictionary = self.to_csv()
         os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
-        for filename in files:
+        for filename in dictionary:
             with open(f"{settings['datafolder']}/{self.workingDirectory}/{filename}", "w", newline="") as f:
-                f.write(files[filename])
-        return FilesDict(files)
+                f.write(dictionary[filename])
+            dictionary[filename] = f"{settings['datafolder']}/{self.workingDirectory}/{filename}"
+        return FilesDict(dictionary)

@@ -5,7 +5,9 @@ import uvicorn
 from settings import settings
 
 
-# from classen_ordner.Mat import Mat
+from classen_ordner.Mat import Mat
+from classen_ordner.Csv import Csv
+from classen_ordner.Xlsx import Xlsx
 
 
 # print(dir(Csv))
@@ -27,7 +29,7 @@ async def convert(output: str, input: str, file: UploadFile = File(...)):
     # inputfile mit passender Klasse
     input_file = eval(input.lower().capitalize())(file.file, file.filename)
     # inputfile öffnen, umwandeln und speichern
-    files = eval(f"input_file.{output}()")
+    files = eval(f"input_file.{output.lower()}()")
     updateFolders(input_file)
     path, file_name = maybe_zipper(
         input_file.workingDirectory, files, input_file.name)
