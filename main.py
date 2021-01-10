@@ -1,18 +1,24 @@
+from classen_ordner.Xlsx import Xlsx
+from classen_ordner.Csv import Csv
+from classen_ordner.Mat import Mat
 from maybe_zipper import maybe_zipper
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
 import uvicorn
 from settings import settings
-
-
-from classen_ordner.Mat import Mat
-from classen_ordner.Csv import Csv
-from classen_ordner.Xlsx import Xlsx
-
+from fastapi.middleware.cors import CORSMiddleware
+origins = ["*"]  # TODO: CHANGE ON PRODUCTION
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # print(dir(Csv))
 
-app = FastAPI()
 
 folders = []
 
