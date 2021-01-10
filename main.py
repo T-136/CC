@@ -1,6 +1,7 @@
 from classen_ordner.Xlsx import Xlsx
 from classen_ordner.Csv import Csv
 from classen_ordner.Mat import Mat
+from classen_ordner.pypandoc import Pypandoc
 from maybe_zipper import maybe_zipper
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
@@ -33,10 +34,18 @@ def updateFolders(obj):
 async def convert(output: str, input: str, file: UploadFile = File(...)):
 
     # inputfile mit passender Klasse
-    input_file = eval(input.lower().capitalize())(file.file, file.filename)
-    # inputfile öffnen, umwandeln und speichern
-    files = eval(f"input_file.{output.lower()}()")
-    updateFolders(input_file)
+    try:
+        input_file = eval(input.lower().capitalize())(file.file, file.filename)
+        # inputfile öffnen, umwandeln und speichern
+        files = eval(f"input_file.{output.lower()}()")
+
+        updateFolders(input_file)
+    except:
+        # datei = eval(input.lower().capitalize())(file.file, file.filename)
+        pandoc = Pypandoc(file.file, file.filename)
+        files = pandoc.convert(input, output)
+        updateFolders(pandoc)
+
     path, file_name = maybe_zipper(
         input_file.workingDirectory, files, input_file.name)
 

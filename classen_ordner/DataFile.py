@@ -9,9 +9,10 @@ import pandas as pd
 class DataFile:
     def __init__(self, filepath, name):
         self.filepath = filepath
-        self.name = name.rsplit(".", maxsplit = 1)[0]
+        self.name = name.rsplit(".", maxsplit=1)[0]
         print(self.name)
         self.workingDirectory = str(uuid.uuid4())
+        os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
 
     def save(self):
         print("ES GIBT NOCH KEINE SAVE FUNKTION", self)
@@ -29,7 +30,6 @@ class Tables(DataFile):
         '''
         data: pd.DataFrame = self.to_dataFrame()
         print("save")
-        os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
         data.to_excel(
             f"{settings['datafolder']}/{self.workingDirectory}/{self.name}.xlsx", header=None, index=False)
         # return f"{settings['datafolder']}/{self.workingDirectory}/irgendwas.xlsx"
@@ -41,7 +41,7 @@ class Tables(DataFile):
         output: dict{filename : csv_datei}
         '''
         dictionary = self.to_csv()
-        os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
+        # os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
         for filename in dictionary:
             with open(f"{settings['datafolder']}/{self.workingDirectory}/{filename}", "w", newline="") as f:
                 f.write(dictionary[filename])
