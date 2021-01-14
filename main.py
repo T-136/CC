@@ -1,6 +1,7 @@
 from classen_ordner.Xlsx import Xlsx
 from classen_ordner.Csv import Csv
 from classen_ordner.Mat import Mat
+from classen_ordner.image import Bild
 from classen_ordner.pypandoc import Pypandoc
 from maybe_zipper import maybe_zipper
 from fastapi import FastAPI, File, UploadFile
@@ -9,6 +10,7 @@ import uvicorn
 from settings import settings
 from fastapi.middleware.cors import CORSMiddleware
 origins = ["*"]  # TODO: CHANGE ON PRODUCTION
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -38,18 +40,26 @@ async def convert(output: str, input: str, file: UploadFile = File(...)):
         input_file = eval(input.lower().capitalize())(file.file, file.filename)
         # inputfile öffnen, umwandeln und speichern
         files = eval(f"input_file.{output.lower()}()")
-
         updateFolders(input_file)
+
+    # except:
+    #     # datei = eval(input.lower().capitalize())(file.file, file.filename)
+    #     pandoc = Pypandoc(file.file, file.filename)
+    #     files = pandoc.convert(input, output)
+    #     updateFolders(pandoc)
+    
     except:
-        # datei = eval(input.lower().capitalize())(file.file, file.filename)
-        pandoc = Pypandoc(file.file, file.filename)
-        files = pandoc.convert(input, output)
-        updateFolders(pandoc)
+        # image conversion
+        im = Bild(file.filename, file.file)
+        path, bild = im.save(output)
 
-    path, file_name = maybe_zipper(
-        input_file.workingDirectory, files, input_file.name)
 
-    return FileResponse(path, filename=file_name)
+    # path, file_name = maybe_zipper(
+    #     input_file.workingDirectory, files, input_file.name)
+
+    return FileResponse(path, filename=bild)
+
+    # return FileResponse(path, filename=file_name)
 
 
 # @app.post("/csvToXlsx")
