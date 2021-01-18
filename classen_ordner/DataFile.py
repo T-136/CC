@@ -7,11 +7,11 @@ import pandas as pd
 
 
 class DataFile:
-    def __init__(self, filepath, name):
+    def __init__(self, name, filepath = None):
         self.filepath = filepath
         self.name = name.rsplit(".", maxsplit=1)[0]
-        print(self.name)
         self.workingDirectory = str(uuid.uuid4())
+        print(self.workingDirectory)
         os.makedirs(f"{settings['datafolder']}/{self.workingDirectory}")
 
     def save(self):

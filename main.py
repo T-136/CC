@@ -47,15 +47,17 @@ async def convert(output: str, input: str, file: UploadFile = File(...)):
 
         # inputfile mit passender Klasse
         try:
-            input_file = eval(input.lower().capitalize())(file.file, file.filename)
+            input_file = eval(input.lower().capitalize())(filepath=file.file, name=file.filename)
+            print(input_file.workingDirectory)
             # inputfile öffnen, umwandeln und speichern
-            files = eval(f"{input_file}.{output.lower()}()")
+            files = eval(f"input_file.{output.lower()}()")
             updateFolders(input_file)
 
         except:
             # image conversion
             im = Bild(file.filename, file.file)
             path, bild = im.save(output)
+            updateFolders(im)
         return FileResponse(path, filename=bild)
         
 
