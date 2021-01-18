@@ -58,7 +58,7 @@ async def convert(output: str, input: str, file: UploadFile = File(...)):
             im = Bild(file.filename, file.file)
             path, bild = im.save(output)
             updateFolders(im)
-        return FileResponse(path, filename=bild)
+        return FileResponse(path, filename=bild) 
         
 
 
